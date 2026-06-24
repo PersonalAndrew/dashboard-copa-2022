@@ -946,3 +946,211 @@ a {
         grid-template-columns: 1fr;
     }
 }
+/* ============================
+   EVENTOS DO JOGO
+============================ */
+
+.events-timeline-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.event-row {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 0.85rem;
+    align-items: flex-start;
+
+    padding: 0.85rem 0.95rem;
+    border-radius: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.16);
+    background:
+        radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 42%),
+        rgba(255, 255, 255, 0.025);
+}
+
+.event-minute {
+    width: 58px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+    background: rgba(212, 175, 55, 0.14);
+    border: 1px solid rgba(212, 175, 55, 0.28);
+
+    color: var(--gold-light);
+    font-size: 0.82rem;
+    font-weight: 950;
+}
+
+.event-title {
+    color: var(--white);
+    font-size: 0.95rem;
+    font-weight: 950;
+    margin-bottom: 0.25rem;
+}
+
+.event-meta {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.event-team-home {
+    color: var(--gold-light);
+}
+
+.event-team-away {
+    color: #9CC7FF;
+}
+
+/* ============================
+   POSIÇÕES MÉDIAS
+============================ */
+
+.average-position-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.average-team-card {
+    padding: 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.16);
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.average-team-card h3 {
+    margin: 0 0 0.85rem;
+    color: var(--gold-light);
+    font-size: 1.05rem;
+    font-weight: 950;
+    text-align: center;
+}
+
+.average-pitch {
+    position: relative;
+    width: 100%;
+    height: 360px;
+
+    border-radius: 24px;
+    overflow: hidden;
+
+    background:
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(20, 88, 54, 0.92), rgba(10, 56, 38, 0.95));
+    background-size: 25% 20%, 25% 20%, 100% 100%;
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.average-pitch::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 18px;
+    pointer-events: none;
+}
+
+.average-pitch::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: 50%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.35);
+    pointer-events: none;
+}
+
+.average-dot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: #080808;
+
+    font-size: 0.7rem;
+    font-weight: 950;
+
+    border: 2px solid rgba(0, 0, 0, 0.35);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.32);
+}
+
+.average-dot.away-dot {
+    background: linear-gradient(135deg, #9CC7FF, #6AA9FF);
+}
+
+.average-dot-name {
+    position: absolute;
+    left: 50%;
+    top: 42px;
+    transform: translateX(-50%);
+
+    min-width: 76px;
+    max-width: 96px;
+
+    padding: 0.18rem 0.35rem;
+    border-radius: 999px;
+
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--white);
+
+    font-size: 0.58rem;
+    font-weight: 850;
+    text-align: center;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.average-note {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 800;
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+    .event-row {
+        grid-template-columns: 48px 1fr;
+    }
+
+    .event-minute {
+        width: 48px;
+        height: 34px;
+        font-size: 0.75rem;
+    }
+
+    .average-pitch {
+        height: 300px;
+    }
+
+    .average-dot {
+        width: 32px;
+        height: 32px;
+        font-size: 0.62rem;
+    }
+
+    .average-dot-name {
+        top: 36px;
+        max-width: 78px;
+        font-size: 0.52rem;
+    }
+}

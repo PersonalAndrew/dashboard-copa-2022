@@ -12,7 +12,7 @@
 
     <link
         rel="stylesheet"
-        href="/dashboard/assets/css/copa2026.css?v=5"
+        href="/dashboard/assets/css/copa2026.css?v=6"
     >
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -161,61 +161,95 @@
             </div>
         </section>
 
-<!-- RANKING DOS JOGADORES + MOMENTUM -->
-<section class="section-grid">
-    <article class="section-panel">
-        <div class="section-header">
-            <span>Jogadores</span>
-            <h2>Ranking individual</h2>
-            <p>
-                Destaques da partida com base em nota, finalizações, xG, gols e participação ofensiva.
-            </p>
-        </div>
+        <!-- RANKING DOS JOGADORES + MOMENTUM -->
+        <section class="section-grid">
+            <article class="section-panel">
+                <div class="section-header">
+                    <span>Jogadores</span>
+                    <h2>Ranking individual</h2>
+                    <p>
+                        Destaques da partida com base em nota, finalizações, xG, gols e participação ofensiva.
+                    </p>
+                </div>
 
-        <div
-            id="player-ranking-box"
-            class="player-ranking-box"
-        >
-            <div class="loading-card">Carregando ranking dos jogadores...</div>
-        </div>
-    </article>
+                <div
+                    id="player-ranking-box"
+                    class="player-ranking-box"
+                >
+                    <div class="loading-card">Carregando ranking dos jogadores...</div>
+                </div>
+            </article>
 
-    <article class="section-panel">
-        <div class="section-header">
-            <span>Momentum</span>
-            <h2>Domínio da partida</h2>
-            <p>
-                Leitura do domínio territorial e pressão ofensiva ao longo dos minutos do jogo.
-            </p>
-        </div>
+            <article class="section-panel">
+                <div class="section-header">
+                    <span>Momentum</span>
+                    <h2>Domínio da partida</h2>
+                    <p>
+                        Leitura do domínio territorial e pressão ofensiva ao longo dos minutos do jogo.
+                    </p>
+                </div>
 
-        <div
-            id="momentum-box"
-            class="momentum-box"
-        >
-            <div class="loading-card">Carregando momentum...</div>
-        </div>
-    </article>
-</section>
+                <div
+                    id="momentum-box"
+                    class="momentum-box"
+                >
+                    <div class="loading-card">Carregando momentum...</div>
+                </div>
+            </article>
+        </section>
+
+        <!-- EVENTOS + POSIÇÕES MÉDIAS -->
+        <section class="section-grid">
+            <article class="section-panel">
+                <div class="section-header">
+                    <span>Eventos</span>
+                    <h2>Linha do tempo</h2>
+                    <p>
+                        Principais acontecimentos da partida organizados por minuto.
+                    </p>
+                </div>
+
+                <div
+                    id="events-timeline-box"
+                    class="events-timeline-box"
+                >
+                    <div class="loading-card">Carregando eventos...</div>
+                </div>
+            </article>
+
+            <article class="section-panel">
+                <div class="section-header">
+                    <span>Posições médias</span>
+                    <h2>Ocupação em campo</h2>
+                    <p>
+                        Distribuição média dos jogadores durante a partida.
+                    </p>
+                </div>
+
+                <div
+                    id="average-position-box"
+                    class="average-position-box"
+                >
+                    <div class="loading-card">Carregando posições médias...</div>
+                </div>
+            </article>
+        </section>
 
         <!-- PRÓXIMOS MÓDULOS -->
         <section class="section-panel full-panel">
             <div class="section-header">
-                <span>Próximos módulos</span>
-                <h2>Expansão da análise</h2>
-                <p>
-                    Dados reais do SofaScore carregados com sucesso. A página agora utiliza estatísticas,
-                    shotmap, logos e arquivos migrados do dashboard antigo.
+                <span>Status do projeto</span>
+                <h2>Próximos ajustes</h2>
+                <p id="data-status-text">
+                    Dados reais do SofaScore carregados com sucesso.
                 </p>
             </div>
 
             <div class="module-list">
-                <div>⭐ Ranking dos jogadores</div>
-                <div>📈 Momentum da partida</div>
-                <div>🕒 Eventos do jogo</div>
-                <div>🗺️ Posições médias</div>
                 <div>📋 Escalações</div>
                 <div>📊 Comparativos avançados</div>
+                <div>🎨 Ajuste final de layout</div>
+                <div>🚀 Deploy final</div>
             </div>
         </section>
 
@@ -250,8 +284,7 @@
                 <div class="insight-item">
                     <strong>3</strong>
                     <p>
-                        A próxima etapa será transformar os dados de jogadores, momentum e eventos em gráficos
-                        e visualizações interativas.
+                        A próxima etapa será revisar o visual, ajustar responsividade e publicar a versão final.
                     </p>
                 </div>
             </div>
@@ -264,6 +297,6 @@
         </footer>
     </main>
 
-    <script src="/dashboard/assets/js/copa2026-app.js?v=5"></script>
+    <script src="/dashboard/assets/js/copa2026-app.js?v=6"></script>
 </body>
 </html>

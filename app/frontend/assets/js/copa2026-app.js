@@ -386,67 +386,6 @@ function renderShotTables(shotmapData) {
     renderShotsTable("#croatia-shots-table", awayShots);
 }
 
-function updateKpisFromData(statisticsData, shotmapData) {
-    const statsRows = flattenStatistics(statisticsData);
-    const shotSummary = getShotmapSummary(shotmapData);
-
-    const possession = findStat(statsRows, ["ballPossession"]);
-    const totalShots = findStat(statsRows, ["totalShotsOnGoal", "totalShots"]);
-
-    updateKpiCard(
-        0,
-        "Placar",
-        `${copa2026State.match.homeScore} x ${copa2026State.match.awayScore}`,
-        "Inglaterra venceu"
-    );
-
-    updateKpiCard(
-        1,
-        "xG",
-        `${shotSummary.homeXg.toFixed(2)} x ${shotSummary.awayXg.toFixed(2)}`,
-        "Gols esperados"
-    );
-
-    updateKpiCard(
-        2,
-        "Finalizações",
-        totalShots
-            ? `${totalShots.home} x ${totalShots.away}`
-            : `${shotSummary.homeShotsCount} x ${shotSummary.awayShotsCount}`,
-        "Inglaterra x Croácia"
-    );
-
-    updateKpiCard(
-        3,
-        "Posse de bola",
-        possession
-            ? `${possession.home} x ${possession.away}`
-            : "--",
-        "Inglaterra x Croácia"
-    );
-
-    renderStatsComparison(statsRows);
-    renderShotSummary(shotSummary);
-    renderShotTables(shotmapData);
-
-    console.log("Estatísticas carregadas:", statsRows);
-    console.log("Resumo de chutes:", shotSummary);
-}
-
-function renderDataStatus(success = true) {
-    const statusPanel = document.querySelector(".full-panel .section-header p");
-
-    if (!statusPanel) return;
-
-    if (success) {
-        statusPanel.textContent =
-            "Dados reais do SofaScore carregados com sucesso. A página agora utiliza estatísticas, shotmap, logos e arquivos migrados do dashboard antigo.";
-    } else {
-        statusPanel.textContent =
-            "A página foi carregada, mas algum arquivo de dados não foi encontrado. Verifique a pasta assets/data/copa2026.";
-    }
-}
-
 function normalizePlayersFromLineups(lineupsData) {
     const homePlayers = lineupsData?.home?.players || [];
     const awayPlayers = lineupsData?.away?.players || [];
@@ -539,13 +478,15 @@ function renderPlayerRanking(lineupsData) {
 }
 
 function normalizeMomentum(momentumData) {
-    const points = momentumData?.graphPoints || [];
+    const points = momentumData?.graphPoints || momentumData?.points || momentumData || [];
+
+    if (!Array.isArray(points)) return [];
 
     return points
         .map((point) => {
             return {
-                minute: Number(point.minute || 0),
-                value: Number(point.value || 0),
+                minute: Number(point.minute || point.time || 0),
+                value: Number(point.value || point.momentum || 0),
             };
         })
         .filter((point) => point.minute > 0);
@@ -637,22 +578,317 @@ function renderMomentum(momentumData) {
     `;
 }
 
+function getHighlightList(highlightsData) {
+    if (Array.isArray(highlightsData)) return highlightsData;
+
+    return (
+        highlightsData?.highlights ||
+        highlightsData?.incidents ||
+        highlightsData?.events ||
+        highlightsData?.data ||
+        []
+    );
+}
+
+function getEventMinute(event) {
+    return (
+        event.time ??
+        event.minute ??
+        event.incidentTime ??
+        event.startMinute ??
+        "-"
+    );
+}
+
+function getEventTeam(event) {
+    if (event.isHome === true) return "Inglaterra";
+    if (event.isHome === false) return "Croácia";
+
+    return (
+        event.teamName ||
+        event.team?.name ||
+        event.player?.team?.name ||
+        "Partida"
+    );
+}
+
+function getEventTitle(event) {
+    const playerName =
+        event.playerName ||
+        event.player?.shortName ||
+        event.player?.name ||
+        event.assist1?.name ||
+        "";
+
+    const type =
+        event.incidentType ||
+        event.eventType ||
+        event.type ||
+        event.title ||
+        "Evento";
+
+    const translatedTypes = {
+        goal: "Gol",
+        card: "Cartão",
+        yellow: "Cartão amarelo",
+        red: "Cartão vermelho",
+        substitution: "Substituição",
+        injury: "Atendimento",
+        period: "Intervalo",
+        var: "VAR",
+        penalty: "Pênalti",
+    };
+
+    const translated = translatedTypes[type] || event.text || event.description || type;
+
+    if (playerName) {
+        return `${translated} · ${playerName}`;
+    }
+
+    return translated;
+}
+
+function renderEventsTimeline(highlightsData) {
+    const box = document.querySelector("#events-timeline-box");
+
+    if (!box) return;
+
+    const events = getHighlightList(highlightsData)
+        .map((event) => {
+            return {
+                minute: getEventMinute(event),
+                title: getEventTitle(event),
+                team: getEventTeam(event),
+                isHome: event.isHome,
+            };
+        })
+        .filter((event) => event.title && event.title !== "Evento")
+        .sort((a, b) => Number(a.minute || 0) - Number(b.minute || 0))
+        .slice(0, 18);
+
+    if (!events.length) {
+        box.innerHTML = `<div class="loading-card">Não foi possível carregar os eventos.</div>`;
+        return;
+    }
+
+    box.innerHTML = `
+        <div class="events-timeline-list">
+            ${events
+                .map((event) => {
+                    const teamClass = event.isHome === false ? "event-team-away" : "event-team-home";
+
+                    return `
+                        <div class="event-row">
+                            <div class="event-minute">${event.minute}'</div>
+
+                            <div>
+                                <div class="event-title">${event.title}</div>
+                                <div class="event-meta ${teamClass}">${event.team}</div>
+                            </div>
+                        </div>
+                    `;
+                })
+                .join("")}
+        </div>
+    `;
+}
+
+function getAverageSideData(averageData, side) {
+    const raw =
+        averageData?.[side]?.players ||
+        averageData?.[side] ||
+        averageData?.averagePositions?.[side] ||
+        averageData?.data?.[side] ||
+        [];
+
+    return Array.isArray(raw) ? raw : [];
+}
+
+function getAveragePlayerName(item) {
+    const player = item.player || {};
+    return player.shortName || player.name || item.name || item.playerName || "-";
+}
+
+function getAveragePlayerNumber(item, index) {
+    const player = item.player || {};
+
+    return (
+        item.jerseyNumber ||
+        item.shirtNumber ||
+        player.jerseyNumber ||
+        player.shirtNumber ||
+        index + 1
+    );
+}
+
+function getAverageCoordinates(item) {
+    const x =
+        item.averageX ??
+        item.x ??
+        item.averagePositionX ??
+        item.positionX ??
+        item.playerCoordinates?.x ??
+        50;
+
+    const y =
+        item.averageY ??
+        item.y ??
+        item.averagePositionY ??
+        item.positionY ??
+        item.playerCoordinates?.y ??
+        50;
+
+    return {
+        x: Math.min(96, Math.max(4, Number(x))),
+        y: Math.min(96, Math.max(4, Number(y))),
+    };
+}
+
+function renderAveragePitch(title, players, isAway = false) {
+    const dots = players
+        .slice(0, 11)
+        .map((item, index) => {
+            const coords = getAverageCoordinates(item);
+            const name = getAveragePlayerName(item);
+            const number = getAveragePlayerNumber(item, index);
+
+            const left = coords.y;
+            const top = 100 - coords.x;
+
+            return `
+                <div
+                    class="average-dot ${isAway ? "away-dot" : ""}"
+                    style="left: ${left}%; top: ${top}%"
+                    title="${name}"
+                >
+                    ${number}
+                    <span class="average-dot-name">${name}</span>
+                </div>
+            `;
+        })
+        .join("");
+
+    return `
+        <div class="average-team-card">
+            <h3>${title}</h3>
+
+            <div class="average-pitch">
+                ${dots}
+            </div>
+
+            <div class="average-note">
+                Números posicionados de acordo com a ocupação média em campo.
+            </div>
+        </div>
+    `;
+}
+
+function renderAveragePositions(averageData) {
+    const box = document.querySelector("#average-position-box");
+
+    if (!box) return;
+
+    const homePlayers = getAverageSideData(averageData, "home");
+    const awayPlayers = getAverageSideData(averageData, "away");
+
+    if (!homePlayers.length && !awayPlayers.length) {
+        box.innerHTML = `<div class="loading-card">Não foi possível carregar as posições médias.</div>`;
+        return;
+    }
+
+    box.innerHTML = `
+        <div class="average-position-grid">
+            ${renderAveragePitch("Inglaterra", homePlayers, false)}
+            ${renderAveragePitch("Croácia", awayPlayers, true)}
+        </div>
+    `;
+}
+
+function updateKpisFromData(statisticsData, shotmapData) {
+    const statsRows = flattenStatistics(statisticsData);
+    const shotSummary = getShotmapSummary(shotmapData);
+
+    const possession = findStat(statsRows, ["ballPossession"]);
+    const totalShots = findStat(statsRows, ["totalShotsOnGoal", "totalShots"]);
+
+    updateKpiCard(
+        0,
+        "Placar",
+        `${copa2026State.match.homeScore} x ${copa2026State.match.awayScore}`,
+        "Inglaterra venceu"
+    );
+
+    updateKpiCard(
+        1,
+        "xG",
+        `${shotSummary.homeXg.toFixed(2)} x ${shotSummary.awayXg.toFixed(2)}`,
+        "Gols esperados"
+    );
+
+    updateKpiCard(
+        2,
+        "Finalizações",
+        totalShots
+            ? `${totalShots.home} x ${totalShots.away}`
+            : `${shotSummary.homeShotsCount} x ${shotSummary.awayShotsCount}`,
+        "Inglaterra x Croácia"
+    );
+
+    updateKpiCard(
+        3,
+        "Posse de bola",
+        possession
+            ? `${possession.home} x ${possession.away}`
+            : "--",
+        "Inglaterra x Croácia"
+    );
+
+    renderStatsComparison(statsRows);
+    renderShotSummary(shotSummary);
+    renderShotTables(shotmapData);
+}
+
+function renderDataStatus(success = true) {
+    const statusPanel = document.querySelector("#data-status-text");
+
+    if (!statusPanel) return;
+
+    if (success) {
+        statusPanel.textContent =
+            "Dados reais carregados com sucesso: estatísticas, finalizações, ranking, momentum, eventos e posições médias.";
+    } else {
+        statusPanel.textContent =
+            "A página foi carregada, mas algum arquivo de dados não foi encontrado. Verifique a pasta assets/data/copa2026.";
+    }
+}
+
 async function initCopa2026Dashboard() {
     try {
         updateHeroText();
         updateTeamLogos();
 
-        const [statisticsData, shotmapData, lineupsData, momentumData] = await Promise.all([
-    loadJson(`${DATA_BASE_PATH}/statistics.json`),
-    loadJson(`${DATA_BASE_PATH}/shotmap.json`),
-    loadJson(`${DATA_BASE_PATH}/lineups.json`),
-    loadJson(`${DATA_BASE_PATH}/momentum.json`),
-]);
+        const [
+            statisticsData,
+            shotmapData,
+            lineupsData,
+            momentumData,
+            highlightsData,
+            averagePositionData,
+        ] = await Promise.all([
+            loadJson(`${DATA_BASE_PATH}/statistics.json`),
+            loadJson(`${DATA_BASE_PATH}/shotmap.json`),
+            loadJson(`${DATA_BASE_PATH}/lineups.json`),
+            loadJson(`${DATA_BASE_PATH}/momentum.json`),
+            loadJson(`${DATA_BASE_PATH}/highlights.json`),
+            loadJson(`${DATA_BASE_PATH}/average_position.json`),
+        ]);
 
-updateKpisFromData(statisticsData, shotmapData);
-renderPlayerRanking(lineupsData);
-renderMomentum(momentumData);
-renderDataStatus(true);
+        updateKpisFromData(statisticsData, shotmapData);
+        renderPlayerRanking(lineupsData);
+        renderMomentum(momentumData);
+        renderEventsTimeline(highlightsData);
+        renderAveragePositions(averagePositionData);
+        renderDataStatus(true);
     } catch (error) {
         console.error("Erro ao inicializar Copa 2026:", error);
         renderDataStatus(false);
