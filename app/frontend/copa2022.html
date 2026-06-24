@@ -8,7 +8,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Copa do Mundo 2022 | Dashboard StatsBomb</title>
+    <title>Copa do Mundo 2022 | AGS Performance Análises</title>
 
     <link
         rel="stylesheet"
@@ -27,13 +27,25 @@
 
     <link
         rel="stylesheet"
-        href="/dashboard/assets/css/copa2022-emergency.css?v=999"
+        href="/dashboard/assets/css/copa2022-emergency.css?v=2000"
     >
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
+    <!-- BARRA DE VOLTAR -->
+    <header class="dashboard-topbar">
+        <a
+            href="/dashboard/index.html"
+            class="dashboard-back-link"
+            title="Voltar para AGS Performance Análises"
+        >
+            <span>←</span>
+            Voltar para AGS Performance Análises
+        </a>
+    </header>
+
     <main class="page-shell">
         <!-- HERO -->
         <section class="hero-section">
@@ -47,7 +59,7 @@
                 </div>
 
                 <div class="hero-title-block">
-                    <span class="hero-kicker">Dashboard Copa do Mundo 2022</span>
+                    <span class="hero-kicker">Copa do Mundo 2022</span>
 
                     <h1>Copa do Mundo 2022</h1>
 
@@ -268,7 +280,6 @@
                 <button class="analysis-tab" data-tab="passes-panel">Passes</button>
             </div>
 
-            <!-- ESCALAÇÕES -->
             <div
                 id="lineups-panel"
                 class="analysis-tab-content active"
@@ -285,7 +296,6 @@
                 </div>
             </div>
 
-            <!-- RESUMO INTELIGENTE -->
             <div
                 id="insights-panel"
                 class="analysis-tab-content"
@@ -302,7 +312,6 @@
                 </div>
             </div>
 
-            <!-- COMPARATIVO -->
             <div
                 id="comparison-panel"
                 class="analysis-tab-content"
@@ -320,7 +329,6 @@
                 </div>
             </div>
 
-            <!-- MOMENTOS -->
             <div
                 id="moments-panel"
                 class="analysis-tab-content"
@@ -338,7 +346,6 @@
                 </div>
             </div>
 
-            <!-- LINHA DO TEMPO -->
             <div
                 id="timeline-panel"
                 class="analysis-tab-content"
@@ -355,7 +362,6 @@
                 </div>
             </div>
 
-            <!-- RANKING INDIVIDUAL -->
             <div
                 id="player-ranking-panel"
                 class="analysis-tab-content"
@@ -373,7 +379,6 @@
                 </div>
             </div>
 
-            <!-- POSIÇÃO MÉDIA -->
             <div
                 id="average-panel"
                 class="analysis-tab-content"
@@ -390,7 +395,6 @@
                 </div>
             </div>
 
-            <!-- MAPA DE CALOR -->
             <div
                 id="heatmap-panel"
                 class="analysis-tab-content"
@@ -407,7 +411,6 @@
                 </div>
             </div>
 
-            <!-- RESUMO DOS JOGADORES -->
             <div
                 id="summary-panel"
                 class="analysis-tab-content"
@@ -424,7 +427,6 @@
                 </div>
             </div>
 
-            <!-- CHUTES -->
             <div
                 id="shots-panel"
                 class="analysis-tab-content"
@@ -441,7 +443,6 @@
                 </div>
             </div>
 
-            <!-- PASSES -->
             <div
                 id="passes-panel"
                 class="analysis-tab-content"
@@ -540,10 +541,10 @@
             </div>
         </section>
 
-        <!-- RODAPÉ SIMPLES -->
+        <!-- RODAPÉ -->
         <footer class="footer-section">
             <p>
-                Desenvolvido por Andrew Gouveia · Análise de Desempenho e Ciência de Dados Aplicados ao Futebol
+                Desenvolvido por Andrew Gouveia · AGS Performance Análises
             </p>
         </footer>
     </main>
