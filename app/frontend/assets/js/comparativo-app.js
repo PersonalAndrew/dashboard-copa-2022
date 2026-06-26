@@ -42,129 +42,33 @@ const teamNameTranslations = {
 };
 
 const teamMetricConfig = [
-    {
-        key: "games",
-        label: "Jogos analisados",
-        format: "number",
-    },
-    {
-        key: "goals",
-        label: "Gols totais",
-        format: "number",
-    },
-    {
-        key: "goalsPerGame",
-        label: "Gols por jogo",
-        format: "decimal",
-    },
-    {
-        key: "xg",
-        label: "xG total",
-        format: "decimal",
-    },
-    {
-        key: "xgPerGame",
-        label: "xG por jogo",
-        format: "decimal",
-    },
-    {
-        key: "shots",
-        label: "Finalizações totais",
-        format: "number",
-    },
-    {
-        key: "shotsPerGame",
-        label: "Finalizações por jogo",
-        format: "decimal",
-    },
-    {
-        key: "shotsOnTarget",
-        label: "Finalizações no gol",
-        format: "number",
-    },
-    {
-        key: "shotAccuracy",
-        label: "Precisão das finalizações",
-        format: "percent",
-    },
-    {
-        key: "conversionRate",
-        label: "Taxa de conversão",
-        format: "percent",
-    },
-    {
-        key: "xgPerShot",
-        label: "xG por finalização",
-        format: "decimal",
-    },
-    {
-        key: "xgDiff",
-        label: "Gols - xG",
-        format: "decimal",
-    },
-    {
-        key: "possession",
-        label: "Posse de bola",
-        format: "percent",
-    },
-    {
-        key: "bigChances",
-        label: "Grandes chances",
-        format: "number",
-    },
-    {
-        key: "finalThirdEntries",
-        label: "Entradas no terço final",
-        format: "number",
-    },
-    {
-        key: "passAccuracy",
-        label: "Acurácia dos passes",
-        format: "percent",
-    },
+    { key: "games", label: "Jogos analisados", format: "number" },
+    { key: "goals", label: "Gols totais", format: "number" },
+    { key: "goalsPerGame", label: "Gols por jogo", format: "decimal" },
+    { key: "xg", label: "xG total", format: "decimal" },
+    { key: "xgPerGame", label: "xG por jogo", format: "decimal" },
+    { key: "shots", label: "Finalizações totais", format: "number" },
+    { key: "shotsPerGame", label: "Finalizações por jogo", format: "decimal" },
+    { key: "shotsOnTarget", label: "Finalizações no gol", format: "number" },
+    { key: "shotAccuracy", label: "Precisão das finalizações", format: "percent" },
+    { key: "conversionRate", label: "Taxa de conversão", format: "percent" },
+    { key: "xgPerShot", label: "xG por finalização", format: "decimal" },
+    { key: "xgDiff", label: "Gols - xG", format: "decimal" },
+    { key: "possession", label: "Posse de bola", format: "percent" },
+    { key: "bigChances", label: "Grandes chances", format: "number" },
+    { key: "finalThirdEntries", label: "Entradas no terço final", format: "number" },
+    { key: "passAccuracy", label: "Acurácia dos passes", format: "percent" },
 ];
 
 const playerMetricConfig = [
-    {
-        key: "rating",
-        label: "Nota",
-        format: "decimal",
-    },
-    {
-        key: "goals",
-        label: "Gols",
-        format: "number",
-    },
-    {
-        key: "assists",
-        label: "Assistências",
-        format: "number",
-    },
-    {
-        key: "shots",
-        label: "Finalizações",
-        format: "number",
-    },
-    {
-        key: "xg",
-        label: "xG",
-        format: "decimal",
-    },
-    {
-        key: "xa",
-        label: "xA",
-        format: "decimal",
-    },
-    {
-        key: "passes",
-        label: "Passes",
-        format: "number",
-    },
-    {
-        key: "sprints",
-        label: "Sprints",
-        format: "number",
-    },
+    { key: "rating", label: "Nota", format: "decimal" },
+    { key: "goals", label: "Gols", format: "number" },
+    { key: "assists", label: "Assistências", format: "number" },
+    { key: "shots", label: "Finalizações", format: "number" },
+    { key: "xg", label: "xG", format: "decimal" },
+    { key: "xa", label: "xA", format: "decimal" },
+    { key: "passes", label: "Passes", format: "number" },
+    { key: "sprints", label: "Sprints", format: "number" },
 ];
 
 async function loadJson(path) {
@@ -184,6 +88,71 @@ function slugify(value) {
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "");
+}
+
+function getFlagCodeByLabel(label = "") {
+    if (label.includes("Inglaterra")) return "gb";
+    if (label.includes("Croácia")) return "hr";
+    if (label.includes("Brasil")) return "br";
+    if (label.includes("Argentina")) return "ar";
+    if (label.includes("França")) return "fr";
+    if (label.includes("Portugal")) return "pt";
+    if (label.includes("Holanda")) return "nl";
+    if (label.includes("Espanha")) return "es";
+    if (label.includes("Alemanha")) return "de";
+    if (label.includes("Marrocos")) return "ma";
+    if (label.includes("Bélgica")) return "be";
+    if (label.includes("Uruguai")) return "uy";
+    if (label.includes("Suíça")) return "ch";
+    if (label.includes("Sérvia")) return "rs";
+    if (label.includes("México")) return "mx";
+    if (label.includes("Polônia")) return "pl";
+    if (label.includes("Japão")) return "jp";
+    if (label.includes("Coreia do Sul")) return "kr";
+    if (label.includes("Gana")) return "gh";
+    if (label.includes("Camarões")) return "cm";
+    if (label.includes("Equador")) return "ec";
+    if (label.includes("Senegal")) return "sn";
+    if (label.includes("Austrália")) return "au";
+    if (label.includes("Estados Unidos")) return "us";
+    if (label.includes("País de Gales")) return "gb";
+    if (label.includes("Irã")) return "ir";
+    if (label.includes("Catar")) return "qa";
+    if (label.includes("Canadá")) return "ca";
+    if (label.includes("Tunísia")) return "tn";
+    if (label.includes("Dinamarca")) return "dk";
+    if (label.includes("Costa Rica")) return "cr";
+    if (label.includes("Arábia Saudita")) return "sa";
+
+    return "";
+}
+
+function getEntityDisplayName(entity) {
+    if (!entity) return "-";
+
+    return entity.label;
+}
+
+function getEntityDisplayHtml(entity) {
+    if (!entity) return "-";
+
+    const code = getFlagCodeByLabel(entity.label);
+
+    if (!code) {
+        return entity.label;
+    }
+
+    return `
+        <span class="entity-with-flag">
+            <img
+                class="flag-img"
+                src="https://flagcdn.com/w80/${code}.png"
+                alt=""
+                loading="lazy"
+            >
+            <span>${entity.label}</span>
+        </span>
+    `;
 }
 
 function getAllPeriod(statisticsData) {
@@ -540,18 +509,46 @@ function getMetricWinner(entityA, entityB, key) {
     return null;
 }
 
+function findEntityKey(entity) {
+    const data = getActiveData();
+
+    const entry = Object.entries(data).find(([, item]) => item === entity);
+
+    return entry ? entry[0] : "";
+}
+
 function getMetricLabel(entity, key, format) {
-    if (!entity) return "Equilíbrio";
+    if (!entity) {
+        return `
+            <span class="highlight-entity-name">Equilíbrio</span>
+        `;
+    }
 
     const value = entity.metrics?.[key];
+    const displayName = getEntityDisplayHtml(entity);
 
-    return `${entity.label} · ${formatMetric(value, format)}`;
+    return `
+        <span class="highlight-content">
+            <span class="highlight-team">${displayName}</span>
+            <span class="highlight-value">${formatMetric(value, format)}</span>
+        </span>
+    `;
+}
+
+function generateVersusTitle(entityA, entityB) {
+    const nameA = getEntityDisplayHtml(entityA);
+    const nameB = getEntityDisplayHtml(entityB);
+
+    return `
+        <div class="versus-comparison-title">
+            ${nameA}
+            <span class="versus-x">x</span>
+            ${nameB}
+        </div>
+    `;
 }
 
 function generateHighlightCards(entityA, entityB) {
-    const metricsA = entityA.metrics || {};
-    const metricsB = entityB.metrics || {};
-
     if (currentMode === "players") {
         const bestRating = getMetricWinner(entityA, entityB, "rating");
         const bestGoalParticipation = getMetricWinner(entityA, entityB, "goals");
@@ -617,6 +614,9 @@ function generateComparisonInsight(entityA, entityB, availableMetrics) {
     const metricsA = entityA.metrics || {};
     const metricsB = entityB.metrics || {};
 
+    const nameA = getEntityDisplayHtml(entityA);
+    const nameB = getEntityDisplayHtml(entityB);
+
     const advantagesA = [];
     const advantagesB = [];
 
@@ -634,9 +634,6 @@ function generateComparisonInsight(entityA, entityB, availableMetrics) {
             advantagesB.push(metric.label);
         }
     });
-
-    const nameA = entityA.label;
-    const nameB = entityB.label;
 
     let mainReading = "";
 
@@ -710,8 +707,11 @@ function generateComparisonInsight(entityA, entityB, availableMetrics) {
         }
     }
 
+    const nameAText = getEntityDisplayName(entityA);
+    const nameBText = getEntityDisplayName(entityB);
+
     const sampleWarning = currentMode === "teams" && metricsA.games !== metricsB.games
-        ? `Atenção: as amostras são diferentes (${nameA}: ${metricsA.games || "—"} jogo(s), ${nameB}: ${metricsB.games || "—"} jogo(s)). Por isso, as métricas por jogo ajudam a tornar a comparação mais justa.`
+        ? `Atenção: as amostras são diferentes (${nameAText}: ${metricsA.games || "—"} jogo(s), ${nameBText}: ${metricsB.games || "—"} jogo(s)). Por isso, as métricas por jogo ajudam a tornar a comparação mais justa.`
         : "";
 
     return `
@@ -747,11 +747,15 @@ function populateSelectors() {
     const entries = Object.entries(data);
 
     entityA.innerHTML = entries
-        .map(([key, item]) => `<option value="${key}">${item.label}</option>`)
+        .map(([key, item]) => {
+            return `<option value="${key}">${getEntityDisplayName(item)}</option>`;
+        })
         .join("");
 
     entityB.innerHTML = entries
-        .map(([key, item]) => `<option value="${key}">${item.label}</option>`)
+        .map(([key, item]) => {
+            return `<option value="${key}">${getEntityDisplayName(item)}</option>`;
+        })
         .join("");
 
     if (currentMode === "teams") {
@@ -803,6 +807,9 @@ function renderComparison() {
         return;
     }
 
+    const entityADisplay = getEntityDisplayHtml(entityA);
+    const entityBDisplay = getEntityDisplayHtml(entityB);
+
     const availableMetrics = metricConfig.filter((metric) => {
         return shouldShowMetric(entityA, entityB, metric.key);
     });
@@ -816,6 +823,7 @@ function renderComparison() {
         return;
     }
 
+    const versusTitleHtml = generateVersusTitle(entityA, entityB);
     const highlightsHtml = generateHighlightCards(entityA, entityB);
 
     const tableHtml = `
@@ -823,8 +831,8 @@ function renderComparison() {
             <thead>
                 <tr>
                     <th>Métrica</th>
-                    <th>${entityA.label}</th>
-                    <th>${entityB.label}</th>
+                    <th>${entityADisplay}</th>
+                    <th>${entityBDisplay}</th>
                     <th>Leitura</th>
                 </tr>
             </thead>
@@ -840,30 +848,45 @@ function renderComparison() {
                         const classA = winner === "a" ? "metric-highlight" : "";
                         const classB = winner === "b" ? "metric-highlight" : "";
 
-                        let reading = "Equilíbrio";
+                        let readingHtml = `<span class="reading-neutral">Equilíbrio</span>`;
 
                         if (winner === "a") {
-                            reading = `${entityA.label} superior`;
+                            readingHtml = `
+                                <span class="reading-result">
+                                    ${entityADisplay}
+                                    <span class="reading-status">superior</span>
+                                </span>
+                            `;
                         }
 
                         if (winner === "b") {
-                            reading = `${entityB.label} superior`;
+                            readingHtml = `
+                                <span class="reading-result">
+                                    ${entityBDisplay}
+                                    <span class="reading-status">superior</span>
+                                </span>
+                            `;
                         }
 
                         if (winner === "unavailable") {
-                            reading = "Dado parcial";
+                            readingHtml = `<span class="reading-neutral">Dado parcial</span>`;
                         }
 
                         return `
                             <tr>
                                 <td class="metric-name">${metric.label}</td>
+
                                 <td class="${classA}">
                                     ${formatMetric(valueA, metric.format)}
                                 </td>
+
                                 <td class="${classB}">
                                     ${formatMetric(valueB, metric.format)}
                                 </td>
-                                <td>${reading}</td>
+
+                                <td>
+                                    ${readingHtml}
+                                </td>
                             </tr>
                         `;
                     })
@@ -875,6 +898,7 @@ function renderComparison() {
     const insightHtml = generateComparisonInsight(entityA, entityB, availableMetrics);
 
     box.innerHTML = `
+        ${versusTitleHtml}
         ${highlightsHtml}
         ${tableHtml}
         ${insightHtml}

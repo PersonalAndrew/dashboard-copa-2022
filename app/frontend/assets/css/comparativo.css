@@ -775,3 +775,690 @@ body::before {
         grid-template-columns: 1fr;
     }
 }
+/* ============================
+   BANDEIRAS / IDENTIDADE VISUAL
+============================ */
+
+.entity-with-flag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.42rem;
+    white-space: nowrap;
+}
+
+.flag-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35em;
+    line-height: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.45));
+}
+
+.metric-table th .flag-icon,
+.metric-table td .flag-icon {
+    font-size: 1.45em;
+}
+
+.auto-highlight-card .flag-icon {
+    font-size: 1.5em;
+}
+
+.comparison-insight-card .flag-icon {
+    font-size: 1.35em;
+}
+
+.metric-card-value {
+    color: var(--gold-light);
+    font-weight: 950;
+}
+.flag-img {
+    width: 34px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+    flex-shrink: 0;
+}
+
+.metric-table th .flag-img,
+.metric-table td .flag-img {
+    width: 38px;
+    height: 27px;
+}
+
+.auto-highlight-card .flag-img {
+    width: 40px;
+    height: 28px;
+}
+
+.comparison-insight-card .flag-img {
+    width: 34px;
+    height: 24px;
+}
+/* ============================
+   AJUSTE FINAL DAS BANDEIRAS
+============================ */
+
+.entity-with-flag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.flag-img {
+    width: 30px;
+    height: 21px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+    flex-shrink: 0;
+}
+
+/* Cabeçalho da tabela */
+.metric-table th .entity-with-flag {
+    justify-content: center;
+    font-size: 0.95rem;
+}
+
+.metric-table th .flag-img {
+    width: 34px;
+    height: 24px;
+}
+
+/* Células da tabela */
+.metric-table td {
+    vertical-align: middle;
+}
+
+.metric-table td .entity-with-flag {
+    justify-content: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.metric-table td .flag-img {
+    width: 30px;
+    height: 21px;
+}
+
+/* Coluna de leitura */
+.metric-table td:last-child {
+    text-align: center;
+    min-width: 180px;
+}
+
+.metric-table td:last-child .entity-with-flag {
+    display: inline-flex;
+    justify-content: center;
+    margin-right: 0.25rem;
+}
+
+/* Cards automáticos */
+.auto-highlight-card strong {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    line-height: 1.15;
+}
+
+.auto-highlight-card .entity-with-flag {
+    justify-content: flex-start;
+    font-size: 0.9rem;
+}
+
+.auto-highlight-card .flag-img {
+    width: 34px;
+    height: 24px;
+}
+
+.metric-card-value {
+    display: block;
+    color: var(--gold-light);
+    font-weight: 950;
+    margin-left: 0;
+}
+
+/* Leitura automática */
+.comparison-insight-card .entity-with-flag {
+    display: inline-flex;
+    justify-content: flex-start;
+    font-weight: 900;
+}
+
+.comparison-insight-card .flag-img {
+    width: 30px;
+    height: 21px;
+}
+
+/* Evita quebra feia em telas menores */
+@media (max-width: 768px) {
+    .entity-with-flag {
+        white-space: normal;
+    }
+
+    .metric-table th .entity-with-flag,
+    .metric-table td .entity-with-flag {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .metric-table td:last-child {
+        min-width: 140px;
+    }
+
+    .auto-highlight-card strong {
+        align-items: flex-start;
+    }
+}
+/* ============================
+   CORREÇÃO FINAL - TABELA E BANDEIRAS
+============================ */
+
+/* Tabela mais organizada */
+.metric-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.55rem;
+}
+
+.metric-table th {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.85rem 0.7rem;
+    color: var(--gold-light);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.metric-table th:first-child {
+    text-align: left;
+    width: 28%;
+}
+
+.metric-table th:nth-child(2),
+.metric-table th:nth-child(3) {
+    width: 22%;
+}
+
+.metric-table th:last-child {
+    width: 28%;
+}
+
+.metric-table td {
+    vertical-align: middle;
+    padding: 1rem 0.85rem;
+    background: rgba(5, 5, 5, 0.92);
+    border-top: 1px solid rgba(212, 175, 55, 0.12);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+    font-size: 0.92rem;
+}
+
+.metric-table td:first-child {
+    border-left: 1px solid rgba(212, 175, 55, 0.12);
+    border-radius: 12px 0 0 12px;
+    text-align: left;
+}
+
+.metric-table td:last-child {
+    border-right: 1px solid rgba(212, 175, 55, 0.12);
+    border-radius: 0 12px 12px 0;
+    text-align: center;
+}
+
+/* Nome da métrica */
+.metric-name {
+    color: #ffffff;
+    font-weight: 900;
+}
+
+/* Valores numéricos maiores e centralizados */
+.metric-table td:nth-child(2),
+.metric-table td:nth-child(3) {
+    text-align: center;
+    font-size: 1.08rem;
+    font-weight: 950;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+/* Valor vencedor em destaque */
+.metric-table td.metric-highlight {
+    color: var(--gold-light) !important;
+    font-size: 1.28rem !important;
+    font-weight: 1000 !important;
+    text-shadow: 0 0 14px rgba(212, 175, 55, 0.22);
+}
+
+/* Bandeira + nome */
+.entity-with-flag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.flag-img {
+    width: 32px;
+    height: 22px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+    flex-shrink: 0;
+}
+
+/* Cabeçalho das seleções na tabela */
+.metric-table th .entity-with-flag {
+    font-size: 1.05rem;
+    font-weight: 1000;
+    color: var(--gold-light);
+}
+
+.metric-table th .flag-img {
+    width: 38px;
+    height: 26px;
+}
+
+/* Coluna leitura: vencedor mais limpo */
+.metric-table td:last-child .entity-with-flag {
+    justify-content: center;
+    font-weight: 950;
+    color: #ffffff;
+}
+
+.metric-table td:last-child .flag-img {
+    width: 34px;
+    height: 24px;
+}
+
+.metric-table td:last-child {
+    font-size: 0.92rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+/* Cards automáticos */
+.auto-highlight-grid {
+    align-items: stretch;
+}
+
+.auto-highlight-card {
+    min-height: 135px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.auto-highlight-card span:first-child {
+    color: var(--gold-light);
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.auto-highlight-card strong {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    margin-top: 0.45rem;
+    line-height: 1.1;
+}
+
+.auto-highlight-card .entity-with-flag {
+    justify-content: flex-start;
+    font-size: 0.95rem;
+    font-weight: 1000;
+    color: var(--gold-light);
+}
+
+.auto-highlight-card .flag-img {
+    width: 36px;
+    height: 25px;
+}
+
+/* Número principal do card maior */
+.metric-card-value {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--gold-light);
+    font-size: 1.45rem;
+    font-weight: 1000;
+    line-height: 1;
+    text-shadow: 0 0 16px rgba(212, 175, 55, 0.25);
+}
+
+/* Remove o tracinho antes do número se ficar feio visualmente */
+.metric-card-value::first-letter {
+    color: var(--gold-light);
+}
+
+/* Leitura automática */
+.comparison-insight-card .entity-with-flag {
+    display: inline-flex;
+    justify-content: flex-start;
+    font-weight: 950;
+    color: var(--gold-light);
+}
+
+.comparison-insight-card .flag-img {
+    width: 30px;
+    height: 21px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .metric-table {
+        font-size: 0.78rem;
+    }
+
+    .metric-table th,
+    .metric-table td {
+        padding: 0.8rem 0.45rem;
+    }
+
+    .metric-table th .entity-with-flag {
+        flex-direction: column;
+        gap: 0.25rem;
+        font-size: 0.82rem;
+    }
+
+    .metric-table td:last-child .entity-with-flag {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .metric-table td.metric-highlight {
+        font-size: 1.05rem !important;
+    }
+
+    .metric-card-value {
+        font-size: 1.25rem;
+    }
+}
+/* ============================
+   AJUSTE FINAL VISUAL COMPARATIVO
+============================ */
+
+/* Centraliza o título "Leitura dos dados" */
+.section-panel .section-header {
+    text-align: center;
+}
+
+.section-panel .section-header h2 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Título Inglaterra x Croácia */
+.versus-comparison-title {
+    width: 100%;
+    margin: 1.4rem 0 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.15rem;
+    color: var(--gold-light);
+    font-size: 1.35rem;
+    font-weight: 1000;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.versus-comparison-title .entity-with-flag {
+    font-size: 1.35rem;
+    font-weight: 1000;
+}
+
+.versus-comparison-title .flag-img {
+    width: 42px;
+    height: 29px;
+}
+
+.versus-x {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 1000;
+    opacity: 0.9;
+}
+
+/* Cards automáticos mais alinhados */
+.auto-highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.8rem;
+}
+
+.auto-highlight-card {
+    min-height: 160px;
+    padding: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+}
+
+.auto-highlight-card > span {
+    min-height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-light);
+    font-size: 0.88rem;
+    font-weight: 1000;
+    line-height: 1.15;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.auto-highlight-card strong {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.highlight-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.highlight-team {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.highlight-team .entity-with-flag {
+    flex-direction: column;
+    gap: 0.35rem;
+    color: var(--gold-light);
+    font-size: 0.95rem;
+    font-weight: 1000;
+    text-align: center;
+}
+
+.highlight-team .flag-img {
+    width: 42px;
+    height: 29px;
+}
+
+.highlight-value {
+    display: block;
+    color: var(--gold-light);
+    font-size: 1.85rem;
+    font-weight: 1000;
+    line-height: 1;
+    text-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+}
+
+/* Tabela */
+.metric-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.55rem;
+}
+
+.metric-table th {
+    padding: 0.95rem 0.8rem;
+    text-align: center;
+    color: var(--gold-light);
+    font-size: 0.85rem;
+    font-weight: 1000;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.metric-table th:first-child {
+    text-align: left;
+}
+
+.metric-table th .entity-with-flag {
+    justify-content: center;
+    color: var(--gold-light);
+    font-size: 1.05rem;
+    font-weight: 1000;
+}
+
+.metric-table th .flag-img {
+    width: 38px;
+    height: 26px;
+}
+
+.metric-table td {
+    padding: 1rem 0.9rem;
+    vertical-align: middle;
+    background: rgba(5, 5, 5, 0.94);
+    border-top: 1px solid rgba(212, 175, 55, 0.11);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.11);
+}
+
+.metric-table td:first-child {
+    width: 28%;
+    text-align: left;
+    border-left: 1px solid rgba(212, 175, 55, 0.11);
+    border-radius: 12px 0 0 12px;
+}
+
+.metric-table td:nth-child(2),
+.metric-table td:nth-child(3) {
+    width: 20%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.12rem;
+    font-weight: 1000;
+}
+
+.metric-table td:last-child {
+    width: 32%;
+    text-align: center;
+    border-right: 1px solid rgba(212, 175, 55, 0.11);
+    border-radius: 0 12px 12px 0;
+}
+
+.metric-name {
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 1000;
+}
+
+/* Número vencedor */
+.metric-table td.metric-highlight {
+    color: var(--gold-light) !important;
+    font-size: 1.45rem !important;
+    font-weight: 1000 !important;
+    text-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+}
+
+/* Leitura superior/equilíbrio */
+.reading-result {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 1000;
+    white-space: nowrap;
+}
+
+.reading-result .entity-with-flag {
+    gap: 0.4rem;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 1000;
+}
+
+.reading-result .flag-img {
+    width: 32px;
+    height: 22px;
+}
+
+.reading-status {
+    color: var(--gold-light);
+    font-size: 0.95rem;
+    font-weight: 1000;
+    text-transform: uppercase;
+}
+
+.reading-neutral {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.95rem;
+    font-weight: 1000;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+    .auto-highlight-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .versus-comparison-title {
+        flex-direction: column;
+        gap: 0.65rem;
+        font-size: 1.1rem;
+    }
+
+    .versus-x {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .auto-highlight-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .metric-table th,
+    .metric-table td {
+        padding: 0.75rem 0.45rem;
+    }
+
+    .metric-table th .entity-with-flag,
+    .reading-result,
+    .reading-result .entity-with-flag {
+        font-size: 0.78rem;
+    }
+
+    .metric-table td.metric-highlight {
+        font-size: 1.15rem !important;
+    }
+
+    .highlight-value {
+        font-size: 1.55rem;
+    }
+}
